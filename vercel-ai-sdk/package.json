@@ -12,7 +12,7 @@
     "test": "node --test test/*.test.mjs"
   },
   "dependencies": {
-    "ai": "^7.0.153",
+    "ai": "^7.0.155",
     "@ai-sdk/mcp": "2.0.84",
     "@ai-sdk/openai-compatible": "^3.0.78",
     "@x402/evm": "2.28.0",
