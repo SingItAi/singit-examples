@@ -53,8 +53,8 @@ one lives in memory, so it restarts with the process.
 
 ## Not here yet
 
-- Python and other languages: the [Python SDK](https://github.com/SingItAi/singit-python) has no
-  framework adapters yet.
+- Python and other languages: there are no Python examples here yet. The
+  [Python SDK](https://github.com/SingItAi/singit-python) has its own README.
 - The examples carry their own copy of the guards instead of depending on `@singitai/sdk`, so a fix
   in the SDK has to be copied over by hand.
 
