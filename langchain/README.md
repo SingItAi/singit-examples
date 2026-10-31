@@ -1,7 +1,7 @@
 # SingIt + LangChain.js example
 
-Runnable recipe for the walkthrough in [`docs/integrations/langchain.md`](../../../docs/integrations/langchain.md).
-Standalone package (own `package.json`/lockfile), not part of the main SingIt build.
+Runnable recipe for the walkthrough in [the integration guide](https://singitai.app/integrations/) ([source](https://github.com/SingItAi/SingItAI/blob/main/docs/integrations/langchain.md)).
+Standalone package (own `package.json` and lockfile).
 
 ```bash
 npm ci
@@ -34,7 +34,7 @@ node src/run.mjs paid "What is x402?"
 
 `src/paid-chat.mjs` builds a LangChain `ChatOpenAI` pointed at `https://ask.singitai.app/v1` with
 its `fetch` replaced by `src/x402/pay.js`'s `createSingitPaidFetch` — a vendored, trimmed copy of
-`sdk/typescript`'s guards (see [`sdk/typescript`](../../../sdk/typescript) for the full SDK). Before
+`@singitai/sdk`'s guards (see [`@singitai/sdk`](https://github.com/SingItAi/singit-js) for the full SDK). Before
 signing anything it checks the merchant's offer is on Base, pays the pinned SingIt Ask address in
 the pinned USDC contract, and is within both the per-call and per-day ceilings.
 

@@ -2,7 +2,7 @@
   "name": "singit-vercel-ai-sdk-example",
   "version": "0.1.0",
   "private": true,
-  "description": "Runnable recipe: SingIt MCP tools and x402-paid chat with the Vercel AI SDK. See docs/integrations/vercel-ai-sdk.md.",
+  "description": "Runnable recipe: SingIt MCP tools and x402-paid chat with the Vercel AI SDK. See https://singitai.app/integrations/.",
   "type": "module",
   "engines": {
     "node": ">=20"
