@@ -106,3 +106,9 @@ def test_tools_unsupported(server, env):
         example.ask_with_tool("count", env)
     assert "proxy on" in example.describe_error(caught.value)
     assert len(server.requests) == 1
+
+
+def test_no_tool_call_makes_one_request(server, env):
+    server.replies = [(200, completion(), {})]
+    assert example.ask_with_tool("hello", env) == "pong"
+    assert len(server.requests) == 1

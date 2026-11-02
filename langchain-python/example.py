@@ -28,6 +28,8 @@ def ask_with_tool(prompt, env=os.environ):
     llm = make_llm(env).bind_tools([word_count])
     messages = [("user", prompt)]
     answer = llm.invoke(messages)
+    if not answer.tool_calls:
+        return answer.content
     messages.append(answer)
     for call in answer.tool_calls:
         if call["name"] != "word_count":
@@ -42,7 +44,7 @@ ERRORS = {
     "over_request_limit": "Per-request limit: lower max_tokens, send less input, pick a cheaper model, or make a key with a higher per-request limit.",
     "invalid_api_key": "Invalid or revoked API key; create one in the SingIt app.",
     "balance_low": "Prepaid balance too low; top up in the SingIt app, Settings, API keys.",
-    "agent_paused": "Returned when the owner has paused their agent.",
+    "agent_paused": "The owner has paused their agent (emergency stop); nothing is charged.",
     "payments_paused": "Payments are paused; try again later.",
     "tools_unsupported": "Tools are not offered yet; the server needs its proxy on.",
 }
