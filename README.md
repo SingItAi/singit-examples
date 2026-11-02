@@ -13,12 +13,17 @@
 
 </div>
 
-Each folder is a standalone package with its own `package.json` and lockfile.
+Each folder is standalone: Node packages have a `package.json` and lockfile; Python examples have pinned requirements.
 
 | Example | Framework | What it shows |
 |---|---|---|
 | [`langchain/`](langchain) | LangChain.js | SingIt MCP tools through `@langchain/mcp-adapters`, and paid chat through `ChatOpenAI` |
 | [`vercel-ai-sdk/`](vercel-ai-sdk) | Vercel AI SDK | SingIt MCP tools through the AI SDK's MCP client, and paid chat through an OpenAI-compatible provider |
+| [`python-openai/`](python-openai) | OpenAI Python SDK | Chat and streaming through a SingIt API key |
+| [`langchain-python/`](langchain-python) | LangChain (Python) | `ChatOpenAI` with a SingIt API key, including a function-tool round trip |
+| [`litellm-python/`](litellm-python) | LiteLLM | `completion` and Router fallback with a SingIt API key |
+| [`openai-agents-python/`](openai-agents-python) | OpenAI Agents SDK | An agent on SingIt with tracing disabled |
+| [`python-x402/`](python-x402) | SingIt Python SDK | x402 payments from your own wallet with client-side limits; free mode only prints the payment offers |
 
 ## Run one
 
@@ -31,6 +36,17 @@ npm start               # free mode: live MCP tools and an unpaid 402 probe
 
 Free mode needs no key and makes no payment. It loads the live MCP tools, calls the free `get_price`
 tool, and sends one unpaid request to SingIt Ask to print the payment offers it gets back.
+
+For Python examples, enter the folder and run:
+
+```bash
+pip install -r requirements.txt -r requirements-dev.txt
+python -m pytest                # offline tests against a local mock
+python example.py "Hello"
+```
+
+The first four Python examples need `SINGIT_API_KEY` and pay from a prepaid SingIt balance.
+`python-x402` defaults to an unpaid offer probe; its README documents explicit paid opt-in.
 
 ## Paid mode
 
@@ -53,8 +69,8 @@ one lives in memory, so it restarts with the process.
 
 ## Not here yet
 
-- Python and other languages: there are no Python examples here yet. The
-  [Python SDK](https://github.com/SingItAi/singit-python) has its own README.
+- Other languages beyond JavaScript and Python. The
+  [Python SDK](https://github.com/SingItAi/singit-python) still has its own README.
 - The examples carry their own copy of the guards instead of depending on `@singitai/sdk`, so a fix
   in the SDK has to be copied over by hand.
 

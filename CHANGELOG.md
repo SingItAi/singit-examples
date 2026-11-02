@@ -5,5 +5,7 @@ This repository was split from [SingItAi/SingItAI](https://github.com/SingItAi/S
 
 ## Unreleased
 
+- Five standalone Python examples: OpenAI, LangChain, LiteLLM, OpenAI Agents, and SingIt x402, with offline HTTP tests.
+
 - Root README, links that work outside the monorepo, CI for both examples, issue and pull request
   templates, security policy, Dependabot.
