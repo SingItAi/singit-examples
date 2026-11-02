@@ -16,7 +16,7 @@
     "@langchain/mcp-adapters": "2.0.1",
     "@langchain/openai": "^1.7.0",
     "@x402/evm": "2.28.0",
-    "viem": "^2.48.11"
+    "viem": "^2.57.13"
   },
   "overrides": {
     "zod": "^4.6.7"
