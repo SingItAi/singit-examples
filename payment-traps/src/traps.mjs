@@ -1,0 +1,25 @@
+const row = (id, type, scenario, check, pattern, signatures, remaining, options = {}) => ({
+  id, type, scenario, check, pattern, signatures, remaining, covered: 'yes', ...options,
+});
+export const traps = [
+  row('price', 'price above listed', 'Listed price within cap; challenge above cap', 'selectOffer: per-call ceiling', /exceeds the configured per-call ceiling/, 0, 10000n, { amount: '7000' }),
+  row('invoice', 'price above listed', 'Invoice above signed ceiling', 'Invoice ceiling validation', /invoice.*unresolved/, 1, 6000n, { billed: '5000' }),
+  row('repeat402', 'charged again after payment', '402 after signed request', 'Single paid send; release on 402', /refused.*nothing was paid.*not repeated/, 1, 10000n, { afterPayment: '402' }),
+  row('duplicate', 'charged again after payment', 'Application repeats successful chat; third call capped', 'DailyLimiter.reserve', /Daily spend cap reached/, 2, 2000n, { duplicate: true, covered: 'partial' }),
+  ...[0, 601, 1.5].map((timeout, i) => row(`timeout${i}`, 'expired quote', `Timeout window ${timeout}`, 'selectOffer: timeout window', /Unexpected payment timeout window/, 0, 10000n, { timeout, covered: 'partial' })),
+  row('payee', 'lookalike payee', 'One-character recipient difference', 'selectOffer: payee pin', /Unexpected payee/, 0, 10000n),
+  row('case', 'lookalike payee', 'Recipient case difference', 'selectOffer: case-sensitive Solana payee', /Unexpected payee/, 0, 10000n, { networks: ['solana'] }),
+  row('asset', 'wrong asset (extra)', 'Different asset address', 'selectOffer: asset pin', /Unexpected payment asset/, 0, 10000n),
+  row('receiptNetwork', 'receipt mismatch', 'Receipt names another network', 'Receipt network validation', /receipt.*unresolved/, 1, 6000n),
+  row('receiptPayer', 'receipt mismatch', 'Receipt names another payer', 'Receipt payer validation', /receipt.*unresolved/, 1, 6000n),
+  row('missingReceipt', 'receipt mismatch', 'Missing receipt accepted', 'Receipt header optional', null, 1, 6000n, { covered: 'partial' }),
+  ...['500', 'drop', 'unreadable'].map(afterPayment => row(`delivery${afterPayment}`, 'paid but not delivered', `Paid response: ${afterPayment}; following call capped`,
+    afterPayment === 'unreadable' ? 'Invoice validation; DailyLimiter.reserve' : 'Single paid send; DailyLimiter.reserve',
+    afterPayment === 'unreadable' ? /invoice.*unresolved/ : /not repeated.*ceiling stays counted/,
+    1, 2000n, { afterPayment, day: 6000, follow: true })),
+  row('callCap', 'over budget (extra)', 'Per-call cap', 'selectOffer: per-call ceiling', /exceeds the configured per-call ceiling/, 0, 10000n, { amount: '7000' }),
+  row('dayCap', 'over budget (extra)', 'Daily cap below offer', 'DailyLimiter.reserve', /Daily spend cap reached/, 0, 3000n, { day: 3000 }),
+  row('resource', 'resource mismatch (extra)', 'Challenge names another URL', 'selectOffer: resource URL', /different resource/, 0, 10000n),
+  { id: 'content', type: 'wrong data delivered', scenario: 'Content quality', check: 'Caller responsibility', covered: 'no' },
+  { id: 'instructions', type: 'hidden instructions', scenario: 'Instructions inside answer data', check: 'Consuming agent responsibility', covered: 'no' },
+];

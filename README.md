@@ -17,6 +17,7 @@ Each folder is standalone: Node packages have a `package.json` and lockfile; Pyt
 
 | Example | Framework | What it shows |
 |---|---|---|
+| [`payment-traps/`](payment-traps) | SingIt SDK 0.1.1 | Offline payment trap scenarios on Base and Solana, with observed guard and signature reports |
 | [`langchain/`](langchain) | LangChain.js | SingIt MCP tools through `@langchain/mcp-adapters`, and paid chat through `ChatOpenAI` |
 | [`vercel-ai-sdk/`](vercel-ai-sdk) | Vercel AI SDK | SingIt MCP tools through the AI SDK's MCP client, and paid chat through an OpenAI-compatible provider |
 | [`python-openai/`](python-openai) | OpenAI Python SDK | Chat and streaming through a SingIt API key |
@@ -71,7 +72,7 @@ one lives in memory, so it restarts with the process.
 
 - Other languages beyond JavaScript and Python. The
   [Python SDK](https://github.com/SingItAi/singit-python) still has its own README.
-- The examples carry their own copy of the guards instead of depending on `@singitai/sdk`, so a fix
+- The LangChain.js and Vercel AI SDK examples carry their own copy of the guards instead of depending on `@singitai/sdk`, so a fix
   in the SDK has to be copied over by hand.
 
 ## Contributing and security
