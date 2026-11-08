@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "ai": "^7.0.158",
-    "@ai-sdk/mcp": "2.0.86",
+    "@ai-sdk/mcp": "2.0.91",
     "@ai-sdk/openai-compatible": "^3.0.84",
     "@x402/evm": "2.30.0",
     "viem": "^2.48.11"
