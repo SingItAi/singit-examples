@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@langchain/core": "^1.2.6",
-    "@langchain/mcp-adapters": "2.0.2",
+    "@langchain/mcp-adapters": "2.0.3",
     "@langchain/openai": "^1.8.0",
     "@x402/evm": "2.30.0",
     "viem": "^2.57.16"
